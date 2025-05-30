@@ -1,9 +1,8 @@
 ---
 - name: Check OS Version to Target Server
   hosts: all
+  remote_user: ec2-user
+  gather_facts: yes
   tasks:
-  - name: Check OS Version
-    register: result
-    shell: cat /etc/redhat-release
-  - debug:
-      msg: "{{ result.stdout }}"
+    - debug:
+        msg: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
